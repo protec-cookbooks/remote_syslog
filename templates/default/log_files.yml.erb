@@ -1,0 +1,7 @@
+files:
+<% @logs.each do |file| %>
+  - <%= file %>
+<% end %>
+destination:
+  host: <%= node[:remote_syslog][:host] %>
+  port: <%= node[:remote_syslog][:port] %>
