@@ -1,8 +1,17 @@
-pkgs = [ 'build-essential', 'libssl-dev', 'ruby-dev', 'rubygems' ]
+pkgs = [ 'build-essential', 'libssl-dev', 'ruby-dev' ]
 pkgs.each do |pkg|
   package pkg do
     action :install
   end
+end
+
+case node['platform']
+when 'ubuntu'
+    unless node['platform_version'].to_f >= 13.10
+        package "rubygems" do
+            action :install
+        end
+    end
 end
 
 gem_package 'remote_syslog' do
